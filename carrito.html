@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - EFORM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html" title="Volver al inicio">
+        <img src="img/Logo.png" alt="EFORM logo">
+      </a>
+    </div>
+    <nav>
+      <a href="index.html#">Inicio</a>
+      <a href="index.html#catalogo">Uniformes</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <div class="acciones">
+      <a class="cart" href="carrito.html" title="Ver carrito">
+        🛒 <span id="cart-count">0</span>
+      </a>
+      <a href="inicio.html"><button class="btn btn-outline">Iniciar sesión</button></a>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <h1>Tu carrito</h1>
+
+    <div id="empty-cart" class="cart-empty" style="display:none;">
+      Tu carrito está vacío.
+    </div>
+
+    <ul id="cart-items" class="cart-list"></ul>
+
+    <div class="cart-summary">
+      <div><strong>Total:</strong> <span id="cart-total">$0</span></div>
+      <div class="cart-actions">
+        <button id="clear-cart" class="btn btn-outline" type="button">Vaciar</button>
+        <button id="pay-cart" class="btn" type="button">Pagar</button>
+      </div>
+    </div>
+  </main>
+
+  <footer id="contacto">
+    <div class="footer-grid">
+      <div>
+        <h3>Formulario electrónico</h3>
+        <p>Plataforma digital para la adquisición de uniformes del SENA. Modernizamos el proceso de compra con tecnología segura y eficiente.</p>
+      </div>
+      <div>
+        <h3>Enlaces rápidos</h3>
+        <ul>
+          <li><a href="index.html#">Inicio</a></li>
+          <li><a href="index.html#catalogo">Uniformes</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <p>📞 +57 (1) 234-5678</p>
+        <p>✉ info@eform.sena.edu.co</p>
+        <p>📍 SENA Regional Bogotá</p>
+      </div>
+    </div>
+    <p class="copy">© 2024 EFORM - SENA. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

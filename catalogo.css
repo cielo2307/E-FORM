@@ -1,0 +1,7 @@
+/* Estilos específicos para la página de Catálogo */
+.catalogo-page { padding: 40px 10%; }
+.catalogo-page h1 { color: #0044cc; margin-bottom: 12px; }
+.catalogo-page .intro { margin-bottom: 16px; }
+.catalogo-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.catalogo-list .producto { background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+.catalogo-list .producto img { width: 100%; max-height: 180px; object-fit: contain; }
