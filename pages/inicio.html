@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inicia sesión en EFORM - Plataforma de uniformes SENA">
+  <title>Iniciar Sesión - EFORM</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0044cc;
+      --primary-dark: #0036a3;
+      --secondary-color: #002966;
+      --accent-color: #ff6b35;
+      --error-color: #dc3545;
+      --success-color: #28a745;
+      --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--background-gradient);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo animado */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="7" cy="7" r="7"/><circle cx="53" cy="7" r="7"/><circle cx="30" cy="30" r="7"/><circle cx="7" cy="53" r="7"/><circle cx="53" cy="53" r="7"/></g></g></svg>') repeat;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .login-container {
+      display: flex;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      max-width: 900px;
+      width: 90%;
+      min-height: 500px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-image {
+      flex: 1;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.08"><circle cx="10" cy="10" r="10"/><circle cx="90" cy="10" r="10"/><circle cx="50" cy="50" r="10"/><circle cx="10" cy="90" r="10"/><circle cx="90" cy="90" r="10"/></g></g></svg>') repeat;
+    }
+
+    .login-image h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-image p {
+      font-size: 1.1rem;
+      text-align: center;
+      opacity: 0.9;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-form {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-header h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .login-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid #e1e5e9;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all var(--transition-medium);
+      background: #f8f9fa;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(0, 68, 204, 0.1);
+    }
+
+    .form-group input.error {
+      border-color: var(--error-color);
+      background: #fff5f5;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .remember-me input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+
+    .forgot-password {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition-fast);
+    }
+
+    .forgot-password:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 68, 204, 0.3);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #e1e5e9;
+    }
+
+    .divider span {
+      background: white;
+      padding: 0 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .register-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-fast);
+    }
+
+    .register-link a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .btn-inicio {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all var(--transition-medium);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .btn-inicio:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+        width: 95%;
+        min-height: auto;
+      }
+
+      .login-image {
+        padding: 2rem;
+        min-height: 200px;
+      }
+
+      .login-image h1 {
+        font-size: 2rem;
+      }
+
+      .login-form {
+        padding: 2rem;
+      }
+
+      .form-options {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .btn-login.loading .btn-text {
+      display: none;
+    }
+
+    .btn-login.loading .spinner {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" title="Volver al inicio" class="btn-inicio">← Volver al inicio</a>
+  
+  <div class="login-container">
+    <div class="login-image">
+      <h1>EFORM</h1>
+      <p>Plataforma digital para la adquisición de uniformes del SENA. Moderniza tu experiencia de compra.</p>
+    </div>
+    
+    <div class="login-form">
+      <div class="login-header">
+        <h2>Bienvenido</h2>
+        <p>Inicia sesión para continuar</p>
+      </div>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Usuario o correo</label>
+          <input type="text" id="username" name="username" placeholder="Ingresa tu usuario o correo" required>
+          <div class="error-message" id="usernameError">El usuario es requerido</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+          <div class="error-message" id="passwordError">La contraseña es requerida</div>
+        </div>
+        
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <span>Recordarme</span>
+          </label>
+          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </div>
+        
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span class="btn-text">Iniciar Sesión</span>
+          <div class="spinner"></div>
+        </button>
+      </form>
+      
+      <div class="divider">
+        <span>o</span>
+      </div>
+      
+      <div class="register-link">
+        ¿No tienes cuenta? <a href="registro.html" id="registerLink">Regístrate aquí</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sistema de login mejorado
+    class LoginSystem {
+      constructor() {
+        this.form = document.getElementById('loginForm');
+        this.loginBtn = document.getElementById('loginBtn');
+        this.usernameInput = document.getElementById('username');
+        this.passwordInput = document.getElementById('password');
+        this.usernameError = document.getElementById('usernameError');
+        this.passwordError = document.getElementById('passwordError');
+        
+        this.init();
+      }
+
+      init() {
+        this.setupEventListeners();
+        this.checkRememberedUser();
+      }
+
+      setupEventListeners() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        
+        // Validación en tiempo real
+        this.usernameInput.addEventListener('blur', () => this.validateUsername());
+        this.passwordInput.addEventListener('blur', () => this.validatePassword());
+        
+        // Limpiar errores al escribir
+        this.usernameInput.addEventListener('input', () => this.clearError('username'));
+        this.passwordInput.addEventListener('input', () => this.clearError('password'));
+      }
+
+      validateUsername() {
+        const username = this.usernameInput.value.trim();
+        if (!username) {
+          this.showError('username', 'El usuario es requerido');
+          return false;
+        }
+        if (username.length < 3) {
+          this.showError('username', 'El usuario debe tener al menos 3 caracteres');
+          return false;
+        }
+        return true;
+      }
+
+      validatePassword() {
+        const password = this.passwordInput.value;
+        if (!password) {
+          this.showError('password', 'La contraseña es requerida');
+          return false;
+        }
+        if (password.length < 6) {
+          this.showError('password', 'La contraseña debe tener al menos 6 caracteres');
+          return false;
+        }
+        return true;
+      }
+
+      showError(field, message) {
+        const input = field === 'username' ? this.usernameInput : this.passwordInput;
+        const error = field === 'username' ? this.usernameError : this.passwordError;
+        
+        input.classList.add('error');
+        error.textContent = message;
+        error.classList.add('show');
+      }
+
+      clearError(field) {
+        const input = field === 'username' ? this.usernameInput : this.passwordInput;
+        const error = field === 'username' ? this.usernameError : this.passwordError;
+        
+        input.classList.remove('error');
+        error.classList.remove('show');
+      }
+
+      async handleSubmit(e) {
+        e.preventDefault();
+        
+        // Validar formulario
+        const isUsernameValid = this.validateUsername();
+        const isPasswordValid = this.validatePassword();
+        
+        if (!isUsernameValid || !isPasswordValid) {
+          return;
+        }
+        
+        // Mostrar estado de carga
+        this.setLoading(true);
+        
+        // Simular autenticación
+        setTimeout(() => {
+          this.authenticate();
+        }, 2000);
+      }
+
+      authenticate() {
+        const username = this.usernameInput.value.trim();
+        const password = this.passwordInput.value;
+        const remember = document.getElementById('remember').checked;
+        
+        // Usuarios de demostración
+        const demoUsers = {
+          'admin': 'admin123',
+          'sena': 'sena2024',
+          'aprendiz': 'aprendiz123'
+        };
+        
+        if (demoUsers[username] && demoUsers[username] === password) {
+          // Guardar sesión
+          const session = {
+            user: username,
+            loginTime: new Date().toISOString(),
+            remember: remember
+          };
+          
+          if (remember) {
+            localStorage.setItem('eform_session', JSON.stringify(session));
+            localStorage.setItem('eform_remembered_user', username);
+          } else {
+            sessionStorage.setItem('eform_session', JSON.stringify(session));
+          }
+          
+          // Redirigir al inicio
+          this.showSuccess('¡Inicio de sesión exitoso!');
+          setTimeout(() => {
+            window.location.href = '../index.html';
+          }, 1000);
+        } else {
+          this.setLoading(false);
+          this.showError('username', 'Usuario o contraseña incorrectos');
+          this.passwordInput.value = '';
+          this.passwordInput.focus();
+        }
+      }
+
+      setLoading(loading) {
+        if (loading) {
+          this.loginBtn.classList.add('loading');
+          this.loginBtn.disabled = true;
+        } else {
+          this.loginBtn.classList.remove('loading');
+          this.loginBtn.disabled = false;
+        }
+      }
+
+      showSuccess(message) {
+        // Crear notificación de éxito
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #28a745;
+          color: white;
+          padding: 1rem 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          z-index: 9999;
+          animation: slideIn 0.3s ease;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+
+      checkRememberedUser() {
+        const rememberedUser = localStorage.getItem('eform_remembered_user');
+        if (rememberedUser) {
+          this.usernameInput.value = rememberedUser;
+          document.getElementById('remember').checked = true;
+          this.passwordInput.focus();
+        }
+      }
+    }
+
+    // Inicializar sistema de login
+    document.addEventListener('DOMContentLoaded', () => {
+      new LoginSystem();
+    });
+
+    // Animación para notificaciones
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

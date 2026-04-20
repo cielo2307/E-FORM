@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Regístrate en EFORM - Plataforma de uniformes SENA">
+  <title>Registrarse - EFORM</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0044cc;
+      --primary-dark: #0036a3;
+      --secondary-color: #002966;
+      --accent-color: #ff6b35;
+      --error-color: #dc3545;
+      --success-color: #28a745;
+      --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--background-gradient);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo animado */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="7" cy="7" r="7"/><circle cx="53" cy="7" r="7"/><circle cx="30" cy="30" r="7"/><circle cx="7" cy="53" r="7"/><circle cx="53" cy="53" r="7"/></g></g></svg>') repeat;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .register-container {
+      display: flex;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      max-width: 1000px;
+      width: 90%;
+      min-height: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .register-image {
+      flex: 1;
+      background: linear-gradient(135deg, var(--accent-color), #e74c3c);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .register-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.08"><circle cx="10" cy="10" r="10"/><circle cx="90" cy="10" r="10"/><circle cx="50" cy="50" r="10"/><circle cx="10" cy="90" r="10"/><circle cx="90" cy="90" r="10"/></g></g></svg>') repeat;
+    }
+
+    .register-image h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .register-image p {
+      font-size: 1.1rem;
+      text-align: center;
+      opacity: 0.9;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .register-form {
+      flex: 1.2;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .register-header h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .register-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid #e1e5e9;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all var(--transition-medium);
+      background: #f8f9fa;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(0, 68, 204, 0.1);
+    }
+
+    .form-group input.error,
+    .form-group select.error {
+      border-color: var(--error-color);
+      background: #fff5f5;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .password-requirements {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #666;
+    }
+
+    .password-requirements ul {
+      margin: 0.25rem 0;
+      padding-left: 1.2rem;
+    }
+
+    .requirement {
+      color: #999;
+      transition: color 0.2s;
+    }
+
+    .requirement.met {
+      color: var(--success-color);
+    }
+
+    .terms-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .terms-checkbox input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      margin-top: 0.125rem;
+    }
+
+    .terms-checkbox label {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .terms-checkbox a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .terms-checkbox a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-register {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-register:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 68, 204, 0.3);
+    }
+
+    .btn-register:active {
+      transform: translateY(0);
+    }
+
+    .btn-register:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #e1e5e9;
+    }
+
+    .divider span {
+      background: white;
+      padding: 0 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-fast);
+    }
+
+    .login-link a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .btn-inicio {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all var(--transition-medium);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .btn-inicio:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .register-container {
+        flex-direction: column;
+        width: 95%;
+        min-height: auto;
+      }
+
+      .register-image {
+        padding: 2rem;
+        min-height: 200px;
+      }
+
+      .register-image h1 {
+        font-size: 2rem;
+      }
+
+      .register-form {
+        padding: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .btn-register.loading .btn-text {
+      display: none;
+    }
+
+    .btn-register.loading .spinner {
+      display: block;
+    }
+
+    /* Scrollbar para el formulario */
+    .register-form::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .register-form::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .register-form::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 10px;
+    }
+
+    .register-form::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" title="Volver al inicio" class="btn-inicio">← Volver al inicio</a>
+  
+  <div class="register-container">
+    <div class="register-image">
+      <h1>Únete a EFORM</h1>
+      <p>Crea tu cuenta y accede al catálogo completo de uniformes SENA con precios exclusivos y envío rápido.</p>
+    </div>
+    
+    <div class="register-form">
+      <div class="register-header">
+        <h2>Crear Cuenta</h2>
+        <p>Completa el formulario para registrarte</p>
+      </div>
+      
+      <form id="registerForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombres">Nombres *</label>
+            <input type="text" id="nombres" name="nombres" placeholder="Ingresa tus nombres" required>
+            <div class="error-message" id="nombresError">Los nombres son requeridos</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="apellidos">Apellidos *</label>
+            <input type="text" id="apellidos" name="apellidos" placeholder="Ingresa tus apellidos" required>
+            <div class="error-message" id="apellidosError">Los apellidos son requeridos</div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tipoDocumento">Tipo de documento *</label>
+            <select id="tipoDocumento" name="tipoDocumento" required>
+              <option value="">Selecciona...</option>
+              <option value="cc">Cédula de Ciudadanía</option>
+              <option value="ti">Tarjeta de Identidad</option>
+              <option value="ce">Cédula de Extranjería</option>
+              <option value="pasaporte">Pasaporte</option>
+            </select>
+            <div class="error-message" id="tipoDocumentoError">Selecciona un tipo de documento</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="documento">Número de documento *</label>
+            <input type="text" id="documento" name="documento" placeholder="Ingresa tu número de documento" required>
+            <div class="error-message" id="documentoError">El documento es requerido</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+          <div class="error-message" id="emailError">El correo es requerido</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="telefono">Teléfono celular *</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="300 123 4567" required>
+          <div class="error-message" id="telefonoError">El teléfono es requerido</div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="username">Usuario *</label>
+            <input type="text" id="username" name="username" placeholder="Elige un nombre de usuario" required>
+            <div class="error-message" id="usernameError">El usuario es requerido</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="ficha">Ficha SENA (opcional)</label>
+            <input type="text" id="ficha" name="ficha" placeholder="Ej: 1234567">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Contraseña *</label>
+            <input type="password" id="password" name="password" placeholder="Crea una contraseña segura" required>
+            <div class="error-message" id="passwordError">La contraseña es requerida</div>
+            <div class="password-requirements">
+              <small>La contraseña debe contener:</small>
+              <ul>
+                <li class="requirement" id="req-length">Al menos 8 caracteres</li>
+                <li class="requirement" id="req-uppercase">Una letra mayúscula</li>
+                <li class="requirement" id="req-lowercase">Una letra minúscula</li>
+                <li class="requirement" id="req-number">Un número</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar contraseña *</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required>
+            <div class="error-message" id="confirmPasswordError">Las contraseñas no coinciden</div>
+          </div>
+        </div>
+        
+        <div class="terms-group">
+          <div class="terms-checkbox">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">
+              Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a> de EFORM
+            </label>
+          </div>
+          <div class="error-message" id="termsError">Debes aceptar los términos y condiciones</div>
+        </div>
+        
+        <button type="submit" class="btn-register" id="registerBtn">
+          <span class="btn-text">Crear Cuenta</span>
+          <div class="spinner"></div>
+        </button>
+      </form>
+      
+      <div class="divider">
+        <span>o</span>
+      </div>
+      
+      <div class="login-link">
+        ¿Ya tienes cuenta? <a href="inicio.html">Inicia sesión aquí</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sistema de registro mejorado
+    class RegisterSystem {
+      constructor() {
+        this.form = document.getElementById('registerForm');
+        this.registerBtn = document.getElementById('registerBtn');
+        this.passwordInput = document.getElementById('password');
+        this.confirmPasswordInput = document.getElementById('confirmPassword');
+        
+        this.init();
+      }
+
+      init() {
+        this.setupEventListeners();
+        this.setupPasswordValidation();
+      }
+
+      setupEventListeners() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        
+        // Validación en tiempo real
+        const inputs = this.form.querySelectorAll('input[required], select[required]');
+        inputs.forEach(input => {
+          input.addEventListener('blur', () => this.validateField(input));
+          input.addEventListener('input', () => this.clearError(input));
+        });
+        
+        // Validación especial para contraseña
+        this.passwordInput.addEventListener('input', () => {
+          this.validatePassword();
+          this.checkPasswordMatch();
+        });
+        
+        this.confirmPasswordInput.addEventListener('input', () => this.checkPasswordMatch());
+      }
+
+      setupPasswordValidation() {
+        this.requirements = {
+          length: document.getElementById('req-length'),
+          uppercase: document.getElementById('req-uppercase'),
+          lowercase: document.getElementById('req-lowercase'),
+          number: document.getElementById('req-number')
+        };
+      }
+
+      validateField(field) {
+        const fieldName = field.name;
+        const value = field.value.trim();
+        
+        switch(fieldName) {
+          case 'nombres':
+          case 'apellidos':
+            if (!value) {
+              this.showError(field, 'Este campo es requerido');
+              return false;
+            }
+            if (value.length < 2) {
+              this.showError(field, 'Debe tener al menos 2 caracteres');
+              return false;
+            }
+            break;
+            
+          case 'tipoDocumento':
+            if (!value) {
+              this.showError(field, 'Selecciona un tipo de documento');
+              return false;
+            }
+            break;
+            
+          case 'documento':
+            if (!value) {
+              this.showError(field, 'El documento es requerido');
+              return false;
+            }
+            if (!/^\d+$/.test(value)) {
+              this.showError(field, 'Solo se permiten números');
+              return false;
+            }
+            if (value.length < 5) {
+              this.showError(field, 'El documento debe tener al menos 5 dígitos');
+              return false;
+            }
+            break;
+            
+          case 'email':
+            if (!value) {
+              this.showError(field, 'El correo es requerido');
+              return false;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+              this.showError(field, 'Ingresa un correo válido');
+              return false;
+            }
+            break;
+            
+          case 'telefono':
+            if (!value) {
+              this.showError(field, 'El teléfono es requerido');
+              return false;
+            }
+            if (!/^\d+$/.test(value.replace(/\s/g, ''))) {
+              this.showError(field, 'Solo se permiten números');
+              return false;
+            }
+            if (value.replace(/\s/g, '').length < 10) {
+              this.showError(field, 'El teléfono debe tener al menos 10 dígitos');
+              return false;
+            }
+            break;
+            
+          case 'username':
+            if (!value) {
+              this.showError(field, 'El usuario es requerido');
+              return false;
+            }
+            if (value.length < 3) {
+              this.showError(field, 'El usuario debe tener al menos 3 caracteres');
+              return false;
+            }
+            if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+              this.showError(field, 'Solo letras, números y guiones bajos');
+              return false;
+            }
+            break;
+        }
+        
+        this.clearError(field);
+        return true;
+      }
+
+      validatePassword() {
+        const password = this.passwordInput.value;
+        let isValid = true;
+        
+        // Longitud
+        if (password.length >= 8) {
+          this.requirements.length.classList.add('met');
+        } else {
+          this.requirements.length.classList.remove('met');
+          isValid = false;
+        }
+        
+        // Mayúscula
+        if (/[A-Z]/.test(password)) {
+          this.requirements.uppercase.classList.add('met');
+        } else {
+          this.requirements.uppercase.classList.remove('met');
+          isValid = false;
+        }
+        
+        // Minúscula
+        if (/[a-z]/.test(password)) {
+          this.requirements.lowercase.classList.add('met');
+        } else {
+          this.requirements.lowercase.classList.remove('met');
+          isValid = false;
+        }
+        
+        // Número
+        if (/\d/.test(password)) {
+          this.requirements.number.classList.add('met');
+        } else {
+          this.requirements.number.classList.remove('met');
+          isValid = false;
+        }
+        
+        if (!password) {
+          this.showError(this.passwordInput, 'La contraseña es requerida');
+          return false;
+        }
+        
+        if (isValid) {
+          this.clearError(this.passwordInput);
+        } else {
+          this.showError(this.passwordInput, 'La contraseña no cumple los requisitos');
+        }
+        
+        return isValid;
+      }
+
+      checkPasswordMatch() {
+        const password = this.passwordInput.value;
+        const confirmPassword = this.confirmPasswordInput.value;
+        
+        if (confirmPassword && password !== confirmPassword) {
+          this.showError(this.confirmPasswordInput, 'Las contraseñas no coinciden');
+          return false;
+        } else if (confirmPassword && password === confirmPassword) {
+          this.clearError(this.confirmPasswordInput);
+          return true;
+        }
+        
+        return false;
+      }
+
+      showError(field, message) {
+        const errorElement = document.getElementById(field.name + 'Error');
+        if (errorElement) {
+          field.classList.add('error');
+          errorElement.textContent = message;
+          errorElement.classList.add('show');
+        }
+      }
+
+      clearError(field) {
+        const errorElement = document.getElementById(field.name + 'Error');
+        if (errorElement) {
+          field.classList.remove('error');
+          errorElement.classList.remove('show');
+        }
+      }
+
+      async handleSubmit(e) {
+        e.preventDefault();
+        
+        // Validar todos los campos
+        const requiredFields = this.form.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+          if (field.name === 'password') {
+            if (!this.validatePassword()) isValid = false;
+          } else if (field.name === 'confirmPassword') {
+            if (!this.checkPasswordMatch()) isValid = false;
+          } else if (field.name === 'terms') {
+            if (!field.checked) {
+              this.showError(field, 'Debes aceptar los términos y condiciones');
+              isValid = false;
+            } else {
+              this.clearError(field);
+            }
+          } else {
+            if (!this.validateField(field)) isValid = false;
+          }
+        });
+        
+        if (!isValid) {
+          return;
+        }
+        
+        // Mostrar estado de carga
+        this.setLoading(true);
+        
+        // Simular registro
+        setTimeout(() => {
+          this.register();
+        }, 2000);
+      }
+
+      register() {
+        const formData = new FormData(this.form);
+        const userData = {};
+        
+        formData.forEach((value, key) => {
+          userData[key] = value;
+        });
+        
+        // Guardar usuario en localStorage (simulación)
+        const users = JSON.parse(localStorage.getItem('eform_users') || '[]');
+        
+        // Verificar si el usuario ya existe
+        if (users.some(user => user.username === userData.username)) {
+          this.setLoading(false);
+          this.showError(document.getElementById('username'), 'Este usuario ya está registrado');
+          return;
+        }
+        
+        if (users.some(user => user.email === userData.email)) {
+          this.setLoading(false);
+          this.showError(document.getElementById('email'), 'Este correo ya está registrado');
+          return;
+        }
+        
+        // Agregar nuevo usuario
+        userData.id = Date.now();
+        userData.createdAt = new Date().toISOString();
+        userData.password = btoa(userData.password); // Encriptación básica (solo para demo)
+        users.push(userData);
+        
+        localStorage.setItem('eform_users', JSON.stringify(users));
+        
+        // Mostrar éxito y redirigir
+        this.showSuccess('¡Cuenta creada exitosamente! Redirigiendo al login...');
+        setTimeout(() => {
+          window.location.href = 'inicio.html';
+        }, 2000);
+      }
+
+      setLoading(loading) {
+        if (loading) {
+          this.registerBtn.classList.add('loading');
+          this.registerBtn.disabled = true;
+        } else {
+          this.registerBtn.classList.remove('loading');
+          this.registerBtn.disabled = false;
+        }
+      }
+
+      showSuccess(message) {
+        // Crear notificación de éxito
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #28a745;
+          color: white;
+          padding: 1rem 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          z-index: 9999;
+          animation: slideIn 0.3s ease;
+          max-width: 300px;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+    }
+
+    // Inicializar sistema de registro
+    document.addEventListener('DOMContentLoaded', () => {
+      new RegisterSystem();
+    });
+
+    // Animación para notificaciones
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
